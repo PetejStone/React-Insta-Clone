@@ -8,18 +8,30 @@ import Form from './Form';
 const CommentSection = props => {
     return(
         <div className="comment-section">
-                {props.comments.map(comment => comment.map((comment,index) => 
-                    <Comment username={comment.username} text={comment.text} key={index}/>
-                    ))}
-                <p className="timestamp">{moment().fromNow()}</p>
-                <Form addComment={props.addComment}/>
-        </div>
             
+                {props.comments.map((comment,index) => 
+                    <Comment 
+                    username={comment.username} 
+                    text={comment.text} key={index} 
+                    addComment={props.addComment}/>
+                    )}
+                <p className="timestamp">{moment().fromNow()}</p>
+               
+                <Form 
+                addComment={props.addComment} 
+                handleChange={props.handleChange} 
+                key={props.index} 
+                index={props.index}
+                data={props.data} />
+        </div>
+          
     );
 }
 
 CommentSection.propTypes = {
     comments: PropTypes.array,
-    addComment: PropTypes.func
+    addComment: PropTypes.func,
+    handleChange: PropTypes.func,
+    index: PropTypes.number
 }
 export default CommentSection
